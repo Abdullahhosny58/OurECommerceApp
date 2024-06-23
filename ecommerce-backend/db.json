@@ -1,4 +1,48 @@
 {
+  "users": [
+    {
+      "email": "abdalluhhosny8@gmail.com",
+      "password": "$2a$10$TQlYtLz/7GTWyIfPGHMUOeUzjvJwHYuOcr2UcWd3Pmzbp3DPH4jrK",
+      "firstName": "Abdalluh",
+      "lastName": "Hosny",
+      "id": 1
+    },
+    {
+      "email": "abdalluhhosny8asdadas@gmail.com",
+      "password": "$2a$10$a4abgX3qEPiGQ2pqAJ.IjO3cI9quPd3PY5jVNiQCSUqHplUIKcyda",
+      "firstName": "Abdalluh",
+      "lastName": "Hosny",
+      "id": 2
+    },
+    {
+      "email": "abdalluhahosny8asdada@gmail.com",
+      "password": "$2a$10$UTiMdqe4iTSIGQ2JeafjF.aiMup9XMp2V6/RdhjvgWm47QRvBqiFe",
+      "firstName": "asda",
+      "lastName": "dasda",
+      "id": 3
+    },
+    {
+      "email": "abdalluhhosnsy8@gmail.com",
+      "password": "$2a$10$HtNCp4EjaSDY1XKAK0jRUOaD0WEQHidhQsFJv7KNfE7GuMyRqO3JK",
+      "firstName": "sadas",
+      "lastName": "sdad",
+      "id": 4
+    },
+    {
+      "email": "abdalluhhosny88@gmail.com",
+      "password": "$2a$10$VwaY1ubFP5XMim5g9pFsCu25h2TIKi22PhJrf35PYDVP95FZLG40y",
+      "firstName": "Abdalluh",
+      "lastName": "Hosny",
+      "id": 5
+    },
+    {
+      "email": "abdalluhhosnys8@gmail.com",
+      "password": "$2a$10$7Q.zX3ouMO21RVkvIQE9qeTMnfGdigGg8QbpUTlnFw2cHO1etXDCG",
+      "firstName": "Abdalluh",
+      "lastName": "Hosny",
+      "id": 6
+    }
+  ],
   "category": [
     {
       "id": 1,
@@ -97,5 +141,41 @@
       "max": 2
     }
   ],
-  "wishlist": []
+  "wishlist": [
+    {
+      "userId": 1,
+      "productId": 1,
+      "id": 1
+    }
+  ],
+  "orders": [
+    {
+      "userId": 6,
+      "items": [
+        {
+          "id": 1,
+          "title": "Jersey top",
+          "price": 249,
+          "quantity": 1,
+          "img": "https://eg.hm.com/assets/styles/HNM/14482498/6103a8463876770c30cdba3535b7be1f333315fe/2/image-thumb__3464789__product_listing/cb91f8f128ac2125e0ec3a008a2e8d2497d15434.jpg"
+        }
+      ],
+      "subtotal": 249,
+      "id": 1
+    },
+    {
+      "userId": 6,
+      "items": [
+        {
+          "id": 17,
+          "title": "Regular Fit football shirt",
+          "price": 449,
+          "quantity": 1,
+          "img": "https://eg.hm.com/assets/styles/HNM/14472541/cb9d35f1480ce5c8b0be39ad7fd35ab9f8004ce0/2/image-thumb__3453052__product_listing/70408034bd9792a93abbc8ad322565337f535e24.jpg"
+        }
+      ],
+      "subtotal": 449,
+      "id": 2
+    }
+  ]
 }

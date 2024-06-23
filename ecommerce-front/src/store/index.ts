@@ -15,6 +15,19 @@ import categories from "./categories/categoriesSlice";
 import products from "./products/productsSlice";
 import cart from "./cart/cartSlice";
 import wishlist from "./wishlist/wishlistSlice";
+import auth from "./auth/authSlice";
+import orders from "./orders/ordersSlice";
+const rootPersistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["cart", "auth"],
+};
+
+const authPersistConfig = {
+  key: "auth",
+  storage,
+  whiteList: ["user", "accessToken"],
+};
 
 const cartPersistConfig = {
   key: "cart",
@@ -22,21 +35,19 @@ const cartPersistConfig = {
   whitelist: ["items"],
 };
 
-const wishlistPersistConfig = {
-  key: "wishlist",
-  storage,
-  whitelist: ["itemsId"],
-};
-
 const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, auth),
   categories,
   products,
+  orders,
   cart: persistReducer(cartPersistConfig, cart),
-  wishlist: persistReducer(wishlistPersistConfig, wishlist),
+  wishlist: wishlist,
 });
 
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

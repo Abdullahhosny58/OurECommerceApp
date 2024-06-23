@@ -3,7 +3,7 @@ import { RootState } from "@store/index";
 import axios from "axios";
 import { axiosEroorHandler } from "@util/index";
 
-import { TProduct } from "@types/productTypes";
+import { TProduct } from "../../../types/productTypes";
 type TResponse = TProduct[];
 
 const actGetProductsByItems = createAsyncThunk(

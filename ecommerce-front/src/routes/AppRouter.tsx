@@ -1,23 +1,37 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 const MainLayout = lazy(() => import("@layouts/MainLayout/MainLayout"));
+const ProfileLayout = lazy(
+  () => import("@layouts/ProfileLayout/ProfileLayout")
+);
 
 const Home = lazy(() => import("@pages/Home"));
 const Categories = lazy(() => import("@pages/Categories"));
 const Prodect = lazy(() => import("@pages/Prodect"));
-const About = lazy(() => import("@pages/About"));
+const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
-const Error = lazy(() => import("@pages/Error/Error"));
 const Cart = lazy(() => import("@pages/Cart"));
 const Wishlist = lazy(() => import("@pages/Wishlist"));
+import Error from "@pages/Error/Error";
+import PageSuspenseFallback from "@components/feedback/PageSuspenseFallback/PageSuspenseFallback";
+import LottieHandler from "@components/feedback/LottieHandler/LottieHandler";
+import Account from "@pages/Account.tsx";
+import ProtectedRoute from "@components/Auth/ProtectedRoute";
+import Orders from "@pages/Orders";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback="loading plase wait....">
-        <MainLayout />{" "}
+      <Suspense
+        fallback={
+          <div style={{ marginTop: "10%" }}>
+            <LottieHandler type="loading" message="Loading please wait..." />
+          </div>
+        }
+      >
+        <MainLayout />
       </Suspense>
     ),
     errorElement: <Error />,
@@ -25,42 +39,43 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback="loading plase wait....">
-            <Home />{" "}
-          </Suspense>
+          <PageSuspenseFallback>
+            <Home />
+          </PageSuspenseFallback>
         ),
       },
       {
-        path: "/Cart",
+        path: "/cart",
         element: (
-          <Suspense fallback="loading plase wait....">
-            {" "}
+          <PageSuspenseFallback>
             <Cart />
-          </Suspense>
+          </PageSuspenseFallback>
         ),
       },
       {
-        path: "/Wishlist",
+        path: "/wishlist",
         element: (
-          <Suspense fallback="loading plase wait....">
-            <Wishlist />
-          </Suspense>
+          <ProtectedRoute>
+            <PageSuspenseFallback>
+              <Wishlist />
+            </PageSuspenseFallback>
+          </ProtectedRoute>
         ),
       },
       {
         path: "/categories",
         element: (
-          <Suspense fallback="loading plase wait....">
+          <PageSuspenseFallback>
             <Categories />
-          </Suspense>
+          </PageSuspenseFallback>
         ),
       },
       {
         path: "/categories/products/:prefix",
         element: (
-          <Suspense fallback="loading plase wait....">
+          <PageSuspenseFallback>
             <Prodect />
-          </Suspense>
+          </PageSuspenseFallback>
         ),
         loader: ({ params }) => {
           if (
@@ -76,32 +91,61 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/about",
+        path: "about-us",
         element: (
-          <Suspense fallback="loading plase wait....">
-            <About />
-          </Suspense>
+          <PageSuspenseFallback>
+            <AboutUs />
+          </PageSuspenseFallback>
         ),
       },
       {
-        path: "/login",
+        path: "login",
         element: (
-          <Suspense>
-            <Login />{" "}
-          </Suspense>
+          <PageSuspenseFallback>
+            <Login />
+          </PageSuspenseFallback>
         ),
       },
       {
-        path: "/register",
+        path: "register",
         element: (
-          <Suspense fallback="loading plase wait....">
-            <Register />{" "}
-          </Suspense>
+          <PageSuspenseFallback>
+            <Register />
+          </PageSuspenseFallback>
         ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <PageSuspenseFallback>
+              <ProfileLayout />
+            </PageSuspenseFallback>
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <PageSuspenseFallback>
+                <Account />
+              </PageSuspenseFallback>
+            ),
+          },
+          {
+            path: "orders",
+            element: (
+              <PageSuspenseFallback>
+                <Orders />
+              </PageSuspenseFallback>
+            ),
+          },
+        ],
       },
     ],
   },
 ]);
+
 const AppRouter = () => {
   return <RouterProvider router={router} />;
 };

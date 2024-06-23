@@ -1,6 +1,6 @@
 import { GridList, Heading } from "@components/common";
 import { Loading } from "@components/feedback";
-import { TProduct } from "@types/productTypes";
+import { TProduct } from "../types/productTypes";
 
 import { Product } from "@components/eCommerce";
 import useWishlist from "@hooks/useWishlist";
@@ -10,8 +10,9 @@ const Wishlist = () => {
   return (
     <>
       <Heading title="Your Wishlist" />
-      <Loading status={loading} error={error}>
+      <Loading status={loading} error={error} type="product">
         <GridList<TProduct>
+          emptyMessage="Your wishlist is empty"
           records={records}
           renderItems={(record) => <Product {...record} />}
         />
